@@ -3,132 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>纯净情绪调节 | 安慰剂效应</title>
+    <meta name="theme-color" content="#0c1020">
+    <title>PURE MIND</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
-            background: linear-gradient(135deg, #0a0e1a, #1a1e3a, #0d0f24);
+            background: linear-gradient(135deg, #0c1020, #1a1f3c, #0d1127);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #e0e0ff;
+            flex-direction: column;
+            color: #e0f0ff;
             overflow: hidden;
-            perspective: 1000px;
+            touch-action: pan-y;
         }
         
-        .container {
-            position: relative;
-            background: rgba(10, 15, 30, 0.85);
-            border-radius: 24px;
+        .app-container {
             width: 100%;
-            max-width: 1000px;
-            padding: 40px 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7),
-                        0 0 0 2px rgba(0, 200, 255, 0.15),
-                        inset 0 0 30px rgba(0, 100, 200, 0.2);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 150, 255, 0.1);
-            z-index: 10;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            width: 100%;
+            padding: 20px 0;
+            z-index: 10;
+            position: relative;
         }
         
         h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #6ecbf5, #a162e8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 1px;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
             font-weight: 300;
             text-transform: uppercase;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #a0b0ff;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-            font-weight: 300;
-            opacity: 0.7;
-        }
-        
-        .emotion-controls {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            width: 100%;
-            margin-top: 20px;
-        }
-        
-        .emotion-control {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 140px;
-        }
-        
-        .emotion-title {
-            font-size: 1.5rem;
-            font-weight: 300;
-            color: #6ecbf5;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.9;
-            text-align: center;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: #f0f5ff;
+            text-shadow: 0 0 15px rgba(110, 203, 245, 0.4);
+            margin-bottom: 5px;
         }
         
         .slider-container {
+            flex: 1;
             position: relative;
-            height: 400px;
-            width: 100px;
-            background: rgba(20, 30, 60, 0.4);
-            border-radius: 50px;
             overflow: hidden;
-            box-shadow: 
-                inset 0 0 20px rgba(0, 0, 0, 0.5),
-                inset 0 0 10px rgba(0, 100, 200, 0.2),
-                0 5px 15px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 150, 255, 0.15);
+            margin: 10px 0;
+            border-radius: 24px;
+            background: rgba(12, 18, 40, 0.7);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
+                        0 0 0 1px rgba(100, 180, 255, 0.1),
+                        inset 0 0 20px rgba(0, 100, 200, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(80, 150, 220, 0.15);
         }
         
         .slider-track {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .emotion-screen {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .emotion-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #9ecbf5;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            opacity: 0.95;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(110, 203, 245, 0.3);
+        }
+        
+        .progress-container {
+            position: relative;
+            height: 55vh;
+            width: 100px;
+            background: rgba(25, 35, 70, 0.3);
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 
+                inset 0 0 20px rgba(0, 0, 0, 0.4),
+                inset 0 0 10px rgba(0, 100, 200, 0.15),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(80, 150, 220, 0.2);
+        }
+        
+        .progress-fill {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 0;
-            background: linear-gradient(to top, #0066cc, #00aaff, #00f7ff);
             border-radius: 50px;
-            transition: height 0.2s ease-out;
+            transition: height 0.3s ease-out;
             box-shadow: 
                 inset 0 0 30px rgba(0, 200, 255, 0.4),
-                0 0 20px rgba(0, 200, 255, 0.3);
+                0 0 20px rgba(0, 200, 255, 0.2);
         }
+        
+        /* 每种情绪不同的渐变颜色 */
+        #indifference-track { background: linear-gradient(to top, #4a5568, #718096, #a0aec0); }
+        #serenity-track { background: linear-gradient(to top, #2b6cb0, #4299e1, #90cdf4); }
+        #joy-track { background: linear-gradient(to top, #b83280, #d53f8c, #f687b3); }
+        #relaxation-track { background: linear-gradient(to top, #2f855a, #38a169, #68d391); }
+        #excitement-track { background: linear-gradient(to top, #c05621, #dd6b20, #f6ad55); }
+        #contentment-track { background: linear-gradient(to top, #6b46c1, #805ad5, #9f7aea); }
         
         .particle-layer {
             position: absolute;
@@ -146,37 +148,7 @@
             background: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
             pointer-events: none;
-            box-shadow: 0 0 8px rgba(0, 200, 255, 0.7);
-        }
-        
-        input[type="range"] {
-            position: absolute;
-            left: -170px;
-            top: 0;
-            width: 400px;
-            height: 100%;
-            -webkit-appearance: none;
-            background: transparent;
-            outline: none;
-            transform: rotate(-90deg);
-            transform-origin: 200px 200px;
-            z-index: 10;
-            cursor: ns-resize;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: transparent;
-            cursor: pointer;
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease;
-        }
-        
-        input[type="range"]:active::-webkit-slider-thumb {
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 8px rgba(180, 230, 255, 0.7);
         }
         
         .zero-indicator {
@@ -189,44 +161,62 @@
             z-index: 5;
         }
         
-        .emotion-indicator {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.8rem;
-            color: rgba(255, 255, 255, 0.1);
-            z-index: 4;
-            pointer-events: none;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+        .control-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            z-index: 10;
         }
         
-        .glow-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50px;
-            box-shadow: 0 0 30px rgba(0, 200, 255, 0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
+        .nav-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(200, 220, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background: #9ecbf5;
+            transform: scale(1.3);
+            box-shadow: 0 0 8px rgba(158, 203, 245, 0.7);
+        }
+        
+        .nav-button {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(25, 40, 70, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(100, 180, 255, 0.2);
+            color: #9ecbf5;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-button:active {
+            transform: scale(0.95);
+            background: rgba(60, 130, 200, 0.3);
         }
         
         .footer {
-            margin-top: 60px;
             text-align: center;
-            padding: 15px 30px;
-            background: rgba(20, 30, 60, 0.4);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 150, 255, 0.1);
-            font-size: 0.95rem;
-            color: #8899cc;
-            max-width: 700px;
-            line-height: 1.6;
+            padding: 10px;
+            font-size: 0.8rem;
+            color: #7a8fb3;
+            margin-top: 5px;
+            letter-spacing: 1px;
         }
         
         .bg-particles {
@@ -241,45 +231,87 @@
         
         .bg-particle {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(0, 200, 255, 0.5);
+            width: 2px;
+            height: 2px;
+            background: rgba(100, 180, 255, 0.4);
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 200, 255, 0.7);
+            box-shadow: 0 0 8px rgba(100, 180, 255, 0.5);
         }
         
-        @media (max-width: 900px) {
-            .emotion-controls {
-                gap: 30px;
-            }
-            
-            .emotion-control {
-                width: 110px;
-            }
-            
-            .slider-container {
-                width: 80px;
-                height: 350px;
-            }
-            
+        /* 纵向拖动区域 */
+        .drag-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            cursor: ns-resize;
+        }
+        
+        /* 安装提示 */
+        .pwa-install-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(25, 35, 70, 0.9);
+            padding: 15px 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 180, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        .pwa-install-banner button {
+            background: linear-gradient(to right, #2b6cb0, #4299e1);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .pwa-install-banner button:active {
+            transform: scale(0.95);
+        }
+        
+        @keyframes slideUp {
+            from { bottom: -100px; opacity: 0; }
+            to { bottom: 20px; opacity: 1; }
+        }
+        
+        @media (max-width: 600px) {
             h1 {
-                font-size: 2.2rem;
-            }
-        }
-        
-        @media (max-width: 700px) {
-            .emotion-controls {
-                flex-direction: column;
-                align-items: center;
-                gap: 40px;
-            }
-            
-            .slider-container {
-                height: 300px;
+                font-size: 2rem;
             }
             
             .emotion-title {
+                font-size: 1.5rem;
                 margin-bottom: 20px;
+            }
+            
+            .progress-container {
+                height: 50vh;
+                width: 80px;
+            }
+            
+            .nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .pwa-install-banner {
+                width: 90%;
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -287,56 +319,235 @@
 <body>
     <div class="bg-particles" id="bg-particles"></div>
     
-    <div class="container">
+    <div class="app-container">
         <div class="header">
-            <h1>纯净情绪调节</h1>
-            <p class="subtitle">通过直观的视觉反馈调节您的情绪状态 | 此界面仅通过视觉安慰剂效应运作</p>
+            <h1>PURE MIND</h1>
         </div>
         
-        <div class="emotion-controls">
-            <div class="emotion-control">
-                <div class="emotion-title">愉悦感</div>
-                <div class="slider-container">
-                    <div class="emotion-indicator">愉悦感</div>
-                    <div class="slider-track" id="pleasure-track"></div>
-                    <div class="particle-layer" id="pleasure-particles"></div>
-                    <div class="zero-indicator"></div>
-                    <div class="glow-effect" id="pleasure-glow"></div>
-                    <input type="range" min="0" max="100" value="0" class="slider" id="pleasure-slider">
+        <div class="slider-container" id="slider-container">
+            <div class="slider-track" id="slider-track">
+                <!-- 冷漠 -->
+                <div class="emotion-screen">
+                    <div class="emotion-title">冷漠</div>
+                    <div class="progress-container">
+                        <div class="progress-fill" id="indifference-track"></div>
+                        <div class="particle-layer" id="indifference-particles"></div>
+                        <div class="zero-indicator"></div>
+                        <div class="drag-area" id="indifference-drag"></div>
+                    </div>
+                </div>
+                
+                <!-- 平和 -->
+                <div class="emotion-screen">
+                    <div class="emotion-title">平和</div>
+                    <div class="progress-container">
+                        <div class="progress-fill" id="serenity-track"></div>
+                        <div class="particle-layer" id="serenity-particles"></div>
+                        <div class="zero-indicator"></div>
+                        <div class="drag-area" id="serenity-drag"></div>
+                    </div>
+                </div>
+                
+                <!-- 愉悦 -->
+                <div class="emotion-screen">
+                    <div class="emotion-title">愉悦</div>
+                    <div class="progress-container">
+                        <div class="progress-fill" id="joy-track"></div>
+                        <div class="particle-layer" id="joy-particles"></div>
+                        <div class="zero-indicator"></div>
+                        <div class="drag-area" id="joy-drag"></div>
+                    </div>
+                </div>
+                
+                <!-- 放松 -->
+                <div class="emotion-screen">
+                    <div class="emotion-title">放松</div>
+                    <div class="progress-container">
+                        <div class="progress-fill" id="relaxation-track"></div>
+                        <div class="particle-layer" id="relaxation-particles"></div>
+                        <div class="zero-indicator"></div>
+                        <div class="drag-area" id="relaxation-drag"></div>
+                    </div>
+                </div>
+                
+                <!-- 激动 -->
+                <div class="emotion-screen">
+                    <div class="emotion-title">激动</div>
+                    <div class="progress-container">
+                        <div class="progress-fill" id="excitement-track"></div>
+                        <div class="particle-layer" id="excitement-particles"></div>
+                        <div class="zero-indicator"></div>
+                        <div class="drag-area" id="excitement-drag"></div>
+                    </div>
+                </div>
+                
+                <!-- 满足 -->
+                <div class="emotion-screen">
+                    <div class="emotion-title">满足</div>
+                    <div class="progress-container">
+                        <div class="progress-fill" id="contentment-track"></div>
+                        <div class="particle-layer" id="contentment-particles"></div>
+                        <div class="zero-indicator"></div>
+                        <div class="drag-area" id="contentment-drag"></div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="emotion-control">
-                <div class="emotion-title">平静度</div>
-                <div class="slider-container">
-                    <div class="emotion-indicator">平静度</div>
-                    <div class="slider-track" id="calm-track"></div>
-                    <div class="particle-layer" id="calm-particles"></div>
-                    <div class="zero-indicator"></div>
-                    <div class="glow-effect" id="calm-glow"></div>
-                    <input type="range" min="0" max="100" value="0" class="slider" id="calm-slider">
-                </div>
+        </div>
+        
+        <div class="control-bar">
+            <div class="nav-button" id="prev-btn">
+                <i class="fas fa-chevron-left"></i>
             </div>
             
-            <div class="emotion-control">
-                <div class="emotion-title">精力水平</div>
-                <div class="slider-container">
-                    <div class="emotion-indicator">精力水平</div>
-                    <div class="slider-track" id="energy-track"></div>
-                    <div class="particle-layer" id="energy-particles"></div>
-                    <div class="zero-indicator"></div>
-                    <div class="glow-effect" id="energy-glow"></div>
-                    <input type="range" min="0" max="100" value="0" class="slider" id="energy-slider">
-                </div>
+            <div class="nav-dots">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+                <div class="dot" data-index="3"></div>
+                <div class="dot" data-index="4"></div>
+                <div class="dot" data-index="5"></div>
+            </div>
+            
+            <div class="nav-button" id="next-btn">
+                <i class="fas fa-chevron-right"></i>
             </div>
         </div>
         
         <div class="footer">
-            <p>此界面设计用于通过视觉安慰剂效应调节情绪。所有变化仅发生在界面中，不产生任何生理或神经化学变化。调节效果源于您对视觉反馈的心理响应。</p>
+            <p>PURE MIND | EMOTIONAL MODULATION</p>
         </div>
     </div>
 
+    <div class="pwa-install-banner" id="pwa-install-banner" style="display:none;">
+        <div>
+            <p>安装 PURE MIND 到主屏幕以获得完整体验</p>
+        </div>
+        <button id="pwa-install-button">安装</button>
+        <button id="pwa-dismiss-button">稍后</button>
+    </div>
+
     <script>
+        // 情绪配置
+        const emotions = [
+            { id: 'indifference', name: '冷漠', value: 0 },
+            { id: 'serenity', name: '平和', value: 0 },
+            { id: 'joy', name: '愉悦', value: 0 },
+            { id: 'relaxation', name: '放松', value: 0 },
+            { id: 'excitement', name: '激动', value: 0 },
+            { id: 'contentment', name: '满足', value: 0 }
+        ];
+        
+        // 当前选择的情绪屏幕索引
+        let currentScreen = 0;
+        const totalScreens = emotions.length;
+        
+        // 初始化应用
+        function initApp() {
+            // 创建背景粒子
+            createBackgroundParticles();
+            
+            // 为每个情绪条创建粒子
+            emotions.forEach(emotion => {
+                createBarParticles(`${emotion.id}-particles`);
+            });
+            
+            // 设置所有拖动区域
+            emotions.forEach(emotion => {
+                setupDragArea(`${emotion.id}-drag`, `${emotion.id}-track`, `${emotion.id}-particles`);
+            });
+            
+            // 设置导航按钮
+            document.getElementById('prev-btn').addEventListener('click', () => navigateToScreen(currentScreen - 1));
+            document.getElementById('next-btn').addEventListener('click', () => navigateToScreen(currentScreen + 1));
+            
+            // 设置导航点
+            document.querySelectorAll('.dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.getAttribute('data-index'));
+                    navigateToScreen(index);
+                });
+            });
+            
+            // 添加触摸滑动支持 - 修复版本
+            setupSwipeNavigation();
+            
+            // 初始化PWA功能
+            initPWA();
+            
+            // 确保初始状态正确
+            updateSliderTrackPosition();
+        }
+        
+        // 导航到指定屏幕
+        function navigateToScreen(index) {
+            if (index < 0) index = 0;
+            if (index >= totalScreens) index = totalScreens - 1;
+            
+            currentScreen = index;
+            updateSliderTrackPosition();
+            
+            // 更新导航点
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        // 更新滑动轨道位置
+        function updateSliderTrackPosition() {
+            const track = document.getElementById('slider-track');
+            track.style.transform = `translateX(-${currentScreen * 100}%)`;
+        }
+        
+        // 设置触摸滑动导航 - 完全修复版本
+        function setupSwipeNavigation() {
+            const container = document.getElementById('slider-container');
+            let touchStartX = 0;
+            let isSwiping = false;
+            
+            container.addEventListener('touchstart', e => {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX;
+                    isSwiping = true;
+                }
+            }, { passive: true });
+            
+            container.addEventListener('touchmove', e => {
+                if (!isSwiping || e.touches.length !== 1) return;
+                
+                const touchCurrentX = e.touches[0].clientX;
+                const diffX = touchCurrentX - touchStartX;
+                
+                // 限制垂直滚动干扰
+                if (Math.abs(diffX) > 10) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            container.addEventListener('touchend', e => {
+                if (!isSwiping || e.changedTouches.length !== 1) return;
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const diffX = touchEndX - touchStartX;
+                
+                // 判断是否满足滑动条件
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        // 向右滑动 - 上一屏
+                        navigateToScreen(currentScreen - 1);
+                    } else {
+                        // 向左滑动 - 下一屏
+                        navigateToScreen(currentScreen + 1);
+                    }
+                }
+                
+                isSwiping = false;
+            }, { passive: true });
+        }
+        
         // 创建背景粒子效果
         function createBackgroundParticles() {
             const container = document.getElementById('bg-particles');
@@ -353,8 +564,8 @@
                 particle.style.top = `${posY}%`;
                 
                 // 随机大小和动画
-                const size = Math.random() * 3 + 1;
-                const duration = Math.random() * 15 + 10;
+                const size = Math.random() * 2 + 1;
+                const duration = Math.random() * 20 + 10;
                 const delay = Math.random() * 5;
                 
                 particle.style.width = `${size}px`;
@@ -368,8 +579,8 @@
                 style.textContent = `
                     @keyframes float {
                         0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-                        10% { opacity: ${Math.random() * 0.5 + 0.3}; }
-                        90% { opacity: ${Math.random() * 0.5 + 0.3}; }
+                        10% { opacity: ${Math.random() * 0.4 + 0.2}; }
+                        90% { opacity: ${Math.random() * 0.4 + 0.2}; }
                         100% { transform: translate(${Math.random()*200 - 100}px, ${Math.random()*200 - 100}px) rotate(${Math.random()*360}deg); opacity: 0; }
                     }
                 `;
@@ -382,14 +593,14 @@
         // 创建进度条内的粒子
         function createBarParticles(containerId) {
             const container = document.getElementById(containerId);
-            const particleCount = 30;
+            const particleCount = 25;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
                 // 随机大小
-                const size = Math.random() * 6 + 2;
+                const size = Math.random() * 5 + 2;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 
@@ -404,24 +615,80 @@
             }
         }
         
-        // 更新进度条和粒子
-        function updateSlider(sliderId, trackId, particlesId, glowId) {
-            const slider = document.getElementById(sliderId);
+        // 设置纵向拖动区域
+        function setupDragArea(dragId, trackId, particlesId) {
+            const dragArea = document.getElementById(dragId);
             const track = document.getElementById(trackId);
             const particles = document.getElementById(particlesId);
-            const glow = document.getElementById(glowId);
             
-            slider.addEventListener('input', function() {
-                const value = this.value;
+            let isDragging = false;
+            let startY = 0;
+            let startHeight = 0;
+            
+            // 鼠标/触摸事件
+            dragArea.addEventListener('mousedown', startDrag);
+            dragArea.addEventListener('touchstart', touchStart);
+            
+            function startDrag(e) {
+                e.preventDefault();
+                isDragging = true;
+                startY = e.clientY;
+                startHeight = parseFloat(track.style.height) || 0;
+                
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', stopDrag);
+            }
+            
+            function touchStart(e) {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    isDragging = true;
+                    startY = e.touches[0].clientY;
+                    startHeight = parseFloat(track.style.height) || 0;
+                    
+                    document.addEventListener('touchmove', touchDrag);
+                    document.addEventListener('touchend', touchEnd);
+                }
+            }
+            
+            function drag(e) {
+                if (isDragging) {
+                    const deltaY = startY - e.clientY;
+                    updateTrackHeight(startHeight + deltaY / 2);
+                }
+            }
+            
+            function touchDrag(e) {
+                if (isDragging && e.touches.length === 1) {
+                    const deltaY = startY - e.touches[0].clientY;
+                    updateTrackHeight(startHeight + deltaY / 2);
+                }
+            }
+            
+            function stopDrag() {
+                isDragging = false;
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+            }
+            
+            function touchEnd() {
+                isDragging = false;
+                document.removeEventListener('touchmove', touchDrag);
+                document.removeEventListener('touchend', touchEnd);
+            }
+            
+            function updateTrackHeight(height) {
+                // 限制高度在0-100之间
+                height = Math.max(0, Math.min(100, height));
                 
                 // 更新进度条高度
-                track.style.height = `${value}%`;
+                track.style.height = `${height}%`;
                 
                 // 更新粒子动画
                 const particleElements = particles.querySelectorAll('.particle');
                 particleElements.forEach(particle => {
                     // 更新粒子位置
-                    const topPos = Math.random() * value;
+                    const topPos = Math.random() * height;
                     particle.style.top = `${100 - topPos}%`;
                     
                     // 更新粒子动画
@@ -441,40 +708,70 @@
                     document.head.appendChild(style);
                 });
                 
-                // 更新发光效果
-                const intensity = value / 100;
-                glow.style.opacity = intensity * 0.7;
-                glow.style.boxShadow = `0 0 ${intensity * 40}px rgba(0, 200, 255, ${intensity * 0.6})`;
-                
                 // 添加微妙的震动反馈
                 if ('vibrate' in navigator) {
                     navigator.vibrate(10);
                 }
+            }
+        }
+        
+        // PWA 初始化
+        function initPWA() {
+            // 检测是否支持PWA
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker 注册成功:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker 注册失败:', error);
+                    });
+            }
+            
+            // 监听安装提示
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // 防止默认提示
+                e.preventDefault();
+                // 保存事件以便稍后触发
+                deferredPrompt = e;
+                
+                // 显示自定义安装提示
+                const installBanner = document.getElementById('pwa-install-banner');
+                installBanner.style.display = 'flex';
+                
+                // 安装按钮事件
+                document.getElementById('pwa-install-button').addEventListener('click', () => {
+                    // 隐藏提示
+                    installBanner.style.display = 'none';
+                    // 触发安装提示
+                    deferredPrompt.prompt();
+                    // 等待用户选择
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('用户接受了安装');
+                        } else {
+                            console.log('用户拒绝了安装');
+                        }
+                        deferredPrompt = null;
+                    });
+                });
+                
+                // 取消按钮事件
+                document.getElementById('pwa-dismiss-button').addEventListener('click', () => {
+                    installBanner.style.display = 'none';
+                });
+            });
+            
+            // 当应用成功安装后
+            window.addEventListener('appinstalled', (evt) => {
+                console.log('应用已成功安装');
+                // 隐藏安装提示
+                document.getElementById('pwa-install-banner').style.display = 'none';
             });
         }
         
-        // 初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            createBackgroundParticles();
-            
-            // 为每个情绪条创建粒子
-            createBarParticles('pleasure-particles');
-            createBarParticles('calm-particles');
-            createBarParticles('energy-particles');
-            
-            // 设置所有滑块
-            updateSlider('pleasure-slider', 'pleasure-track', 'pleasure-particles', 'pleasure-glow');
-            updateSlider('calm-slider', 'calm-track', 'calm-particles', 'calm-glow');
-            updateSlider('energy-slider', 'energy-track', 'energy-particles', 'energy-glow');
-            
-            // 添加初始动画
-            setTimeout(() => {
-                document.querySelectorAll('.emotion-title').forEach(title => {
-                    title.style.transition = 'opacity 1s ease';
-                    title.style.opacity = 1;
-                });
-            }, 500);
-        });
+        // 初始化应用
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
